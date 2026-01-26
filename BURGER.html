@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AR Dish Demo</title>
+
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+    <!-- AR.js -->
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+  </head>
+
+  <body style="margin: 0; overflow: hidden;">
+
+    <a-scene
+      embedded
+      arjs="sourceType: webcam; debugUIEnabled: false;">
+      <a-light type="ambient" intensity="0.8"></a-light>
+<a-light type="directional" position="1 2 1" intensity="0.6"></a-light>
+      <!-- Marker -->
+      <a-marker preset="hiro">
+
+        <!-- Dish -->
+        <a-image
+  src="burger.jpg"
+  position="0 0.5 0"
+  width="1.6"
+  height="1.6"
+  rotation="-18 0 0"
+  material="side: double; transparent: true"
+  animation="property: rotation; to: -18 360 0; loop: true; dur: 12000; easing: linear">
+  <a-circle
+  position="0 0.01 0"
+  rotation="-90 0 0"
+  radius="0.9"
+  color="#ffffff"
+  opacity="0.2">
+</a-circle>
+        </a-image>
+
+      </a-marker>
+
+      <!-- Camera -->
+      <a-entity camera></a-entity>
+
+    </a-scene>
+
+  </body>
+</html>
