@@ -17,7 +17,38 @@
     height: 100%;
     overflow: hidden;
   }
-  a-scene {
+<div id="startScreen" style="
+  position: fixed;
+  inset: 0;
+  background: white;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+">
+  <h2>Scan the menu to see it in AR</h2>
+
+  <img src="./menu.jpg" style="
+    max-width: 90%;
+    border-radius: 12px;
+    margin: 20px 0;
+  ">
+
+  <button onclick="startAR()" style="
+    padding: 14px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    background: black;
+    color: white;
+  ">
+    Start AR
+  </button>
+</div>
+     a-scene {
     width: 100%;
     height: 100%;
   }
@@ -25,12 +56,13 @@
   </head>
 
   <body>
-    <a-scene
-      mindar-image="imageTargetSrc: targets.mind;"
-      vr-mode-ui="enabled: false"
-      device-orientation-permission-ui="enabled: false"
-      embedded
-    >
+      <a-scene
+  mindar-image="imageTargetSrc: targets.mind; autoStart: false;"
+  vr-mode-ui="enabled: false"
+  device-orientation-permission-ui="enabled: false"
+  embedded
+  style="visibility: hidden;"
+>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
@@ -44,9 +76,19 @@
           scale="1 1 1"
           rotation="0 0 0"
         ></a-image>
+<script>
+  function startAR() {
+    document.querySelector("#startScreen").style.display = "none";
 
+    const scene = document.querySelector("a-scene");
+    scene.style.visibility = "visible";
+
+    scene.components["mindar-image"].start();
+  }
+</script>
       </a-entity>
     </a-scene>
   </body>
 </html>
+
 
